@@ -1,0 +1,109 @@
+.heading {
+    text-align: center !important;
+    background-color: #333 !important;
+    color: white;
+}
+
+.sidebar {
+    background-color: #333;
+    color: white;
+    height: 93vh;
+    overflow: auto;
+}
+
+.list-group-item {
+    background-color: #555;
+    color: white;
+    cursor: pointer;
+}
+
+
+.list-group-item:hover {
+    background-color: #777;
+}
+
+.divActive {
+    background-color: #777;
+}
+
+.tabs-container {
+    padding: 20px;
+}
+
+
+.fixed-btn {
+    position: fixed;
+    /* bottom: 20px; */
+    left: 300px;
+    /* right: 0; */
+    bottom: 7px;
+    width: 50px;
+    height: 50px;
+    border-radius: 50px;
+    font-size: 25px;
+    /* padding: 13px; */
+    background-color: teal;
+    border: none;
+}
+
+.repoHead {
+    color: aqua;
+}
+
+.content {
+    flex-grow: 1;
+    padding: 20px;
+}
+
+.delButton {
+    float: right;
+}
+
+.custom-size {
+    font-size: 23px;
+    float: right;
+    color: cyan;
+    height: 28px;
+    width: 42px;
+    height: 30px;
+}
+
+
+.nav-item .nav-link {
+    width: 200px;
+    background: cadetblue;
+    //margin-right: 2px;
+    color: inherit;
+}
+
+.nav-item .nav-link.active {
+    color: white;
+}
+
+.avatar {
+    vertical-align: middle;
+    width: 25px;
+    height: 25px;
+    padding: 2px 2px 2px 2px;
+}
+
+
+.avatar1 {
+    width: 40px;
+    height: 33px
+}
+
+.commentHead {
+    display: block;
+    text-align: center;
+    padding: 8px;
+    font-size: 25px;
+    background: #4c6e7e;
+    color: white;
+}
+
+.addBtn {
+    background: black;
+    width: 100px;
+    color: white;
+}

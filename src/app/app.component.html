@@ -1,0 +1,123 @@
+<!--Heading-->
+<h1 class="heading m-0">
+  <img class="avatar1" src="../assets/gitIcon.jpeg" alt="" /> Github Browser
+</h1>
+<div>
+
+  <!--Container-->
+  <div class="container-fluid">
+    <div class="row">
+      <!--Side Bar(Left Panel)-->
+      <div class="col-md-3 p-0">
+        <div class="sidebar">
+          <ul class="list-group">
+            <li class="list-group-item" *ngFor="let item of repositoryData;let i=index"
+              [ngClass]="{'divActive': activeIndex === i}" (click)="selectRecord(item);setActiveIndex(i)">
+              <b class="repoHead">{{ item.repositoryName }}</b><br />
+              {{item.repositoryName }} Repository was generated with Angular CLI version 12.2.12
+            </li>
+          </ul>
+          <button class="btn btn-primary fixed-btn" data-toggle="modal" data-target="#exampleModal"
+            data-whatever="@mdo">+</button>
+        </div>
+      </div>
+
+      <!--Right Panel-->
+      <div class="col-md-9">
+        <div>
+          <h2 class="tabButton "> <button class="btn btn-danger  mt-1 mb-1 delButton"
+              (click)="deleteRepository()">Delete</button></h2>
+        </div>
+
+        <ul class="nav nav-pills mb-3 mt-5" id="pills-tab" role="tablist">
+          <li class="nav-item" role="presentation">
+            <button class="nav-link  active" id="pills-home-tab" data-toggle="pill" data-target="#pills-home"
+              type="button" role="tab" aria-controls="pills-home" aria-selected="true">Branches</button>
+          </li>
+          <li class="nav-item" role="presentation">
+            <button class="nav-link " id="pills-profile-tab" data-toggle="pill" data-target="#pills-profile"
+              type="button" role="tab" aria-controls="pills-profile" aria-selected="false">Issues</button>
+          </li>
+        </ul>
+
+        <div class="tab-content" id="pills-tabContent">
+          <!--Branchs Tab-->
+          <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
+            <ul class="list-group" *ngIf="displayBranch && repositoryData.length!=0">
+              <h4>List of Branches from <u>{{branchHeading}}</u> Repository</h4>
+              <li class="list-group-item" *ngFor="let repo of displaySelectedRecord"
+                (click)="displayComments(repo.branch)" data-toggle="modal" data-target=".bd-example-modal-lg"> {{
+                repo.branch }}
+                <i class="bi bi-arrow-right custom-size"></i>
+              </li>
+            </ul>
+          </div>
+
+          <!--Issues Tab-->
+          <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab"
+            *ngIf="displayBranch && repositoryData.length!=0">
+            <ul class="list-group" *ngIf="displayBranch && repositoryData.length!=0">
+              <h4>List of Issues from <u>{{branchHeading}}</u> Repository</h4>
+              <li class="list-group-item" *ngFor="let issue of issues"> <img class="avatar" [src]=issue.imagePath
+                  alt="" /> {{ issue.name }}
+                <br />
+                {{issue.description}}
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!--Add Repository Modal-->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">ADD NEW REPOSITORY</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="addRepositoryData">
+          <div class="form-group">
+            <label for="" class="col-form-label">Owner/Organization </label>
+            <input type="text" class="form-control" formControlName="organization">
+          </div>
+          <div class="form-group">
+            <label for="" class="col-form-label">Repository Name </label>
+            <input type="text" class="form-control" formControlName="repositoryName">
+          </div>
+          <div class="text-center mt-3">
+            <button type="button" class="addBtn" (click)="addRepository()">ADD</button>
+          </div>
+
+        </form>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!--Comments Modal-->
+<div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <h3 class="commentHead">COMMITS: {{branchName}}</h3>
+      <ul>
+        <li *ngFor="let issue of displayCommentsData"> <u>{{ issue.date }} </u>
+          <br />
+          {{issue.description}}<br />
+          <img class="avatar mr-2" [src]=issue.imagePath alt="" /><b>{{issue.name}}</b>
+          <hr>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<router-outlet></router-outlet>
